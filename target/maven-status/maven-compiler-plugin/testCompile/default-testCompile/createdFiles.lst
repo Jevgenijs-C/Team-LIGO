@@ -1,0 +1,6 @@
+stepDefinitions\SampleSteps.class
+pages_sample\AgeSubmittedPage.class
+stepDefinitions\Hooks.class
+pages_sample\AgePage.class
+stepDefinitions\SamplePOSteps.class
+runners\CucumberRunner.class

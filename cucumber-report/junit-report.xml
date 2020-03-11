@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="1" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="87.456928">
+<testcase classname="As a user I need to edit a list" name="As a user I add a new person" time="87.456928">
+<failure message="org.junit.ComparisonFailure: expected:&lt;...ithub.io/site/tasks/[enter_a_new_person_with_a_job].html&gt; but was:&lt;...ithub.io/site/tasks/[list_of_people_with_jobs].html&gt;&#13;&#10;&#9;at org.junit.Assert.assertEquals(Assert.java:115)&#13;&#10;&#9;at org.junit.Assert.assertEquals(Assert.java:144)&#13;&#10;&#9;at stepDefinitions.TaskTwoSteps.iSeeNewPage(TaskTwoSteps.java:38)&#13;&#10;&#9;at ✽.And I see new page(Task2.feature:9)&#13;&#10;"><![CDATA[Given I open the page.......................................................passed
+When I press add person button..............................................passed
+And I see new page..........................................................failed
+And I add  new name "Ivan"..................................................skipped
+And I add new job title "driver"............................................skipped
+And I press add button......................................................skipped
+And I redirect on main page.................................................skipped
+And I see new "Ivan" and new "driver" there.................................skipped
+And I reset list button.....................................................skipped
+Then I don't see new person.................................................skipped
+
+StackTrace:
+org.junit.ComparisonFailure: expected:<...ithub.io/site/tasks/[enter_a_new_person_with_a_job].html> but was:<...ithub.io/site/tasks/[list_of_people_with_jobs].html>
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at stepDefinitions.TaskTwoSteps.iSeeNewPage(TaskTwoSteps.java:38)
+	at ✽.And I see new page(Task2.feature:9)
+]]></failure>
+</testcase>
+</testsuite>
