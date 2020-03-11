@@ -102,7 +102,8 @@ public class OrderHistory {
     }
 
     @Then("^I have checked out my purchase successfully$")
-    public void iHaveCheckedOutMyPurchaseSuccessfully() {
+    public void iHaveCheckedOutMyPurchaseSuccessfully()
+    {
     }
 
     @Given("^I am can see checkout success message$")
