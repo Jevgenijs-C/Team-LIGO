@@ -1,6 +1,5 @@
 package stepDefinitions;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -8,69 +7,87 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import pages_sample.DiscountPage;
-import pages_sample.LoginPage;
-import stepDefinitions.Hooks;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages_sample.LoginPage;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
+import pages_sample.*;
 
-import static org.junit.Assert.*;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class DiscountSteps {
     private WebDriver driver;
-    static DiscountPage discountPage;
+    private static WebDriverWait wait;
+    static long startTime;
+    static ProductListPage productListPage;
+    static ProductPage productPage;
+    static CartPage cartPage;
 
     public DiscountSteps() {
         this.driver = Hooks.driver;
-        discountPage = PageFactory.initElements(Hooks.driver, DiscountPage.class);
+        productListPage = PageFactory.initElements(Hooks.driver, ProductListPage.class);
+        productPage = PageFactory.initElements(Hooks.driver, ProductPage.class);
+        cartPage = PageFactory.initElements(Hooks.driver, CartPage.class);
+
+        productPage.setDriver(driver);
     }
 
-    //Page Navigation
-    @Given("^I am on page \"([^\"]*)\"$")
-    public void iAmOnDesktopsPage(PageUrl) throws Throwable {
-        driver.get(PageUrl);
-
+    @Given("^I am on page$")
+    public void iAmOnPage(Map<String, String> valuesToEnter) {
+        for (Map.Entry<String, String> e : valuesToEnter.entrySet()) {
+            driver.get(e.getValue());
+        }
     }
 
-    @And("^I go to page \"([^\"]*)\"$")
-    public void iGoToPage(PageUrl) throws Throwable {
-        driver.get(PageUrl);
+    @Then("^I see discount for$")
+    public void iSeeDiscount() {
+        productListPage.CheckDiscountPresence();
     }
 
-    @When("^I click on \"([^\"]*)\"$")
-    public void iClickOn(String element) throws Throwable {
-        discountPage.element.click();
-        assertEquals(pageUrl, driver.getCurrentUrl());
+    @When("^I click on Apple Cinema$")
+    public void iClickOnAppleCinema() {
+        productListPage.ClickOnProduct();
     }
 
-    //Discounts
-
-    @Then("^I see discount for \"([^\"]*)\"$")
-    public void iSeeDiscountFor(int arg0) throws Throwable {
-        assertTrue(discountPage.discount.isDisplayed());
-
+    @Then("^I see discountt$")
+    public void iSeeDiscountt() {
+        productPage.CheckDiscountPresence();
     }
 
-    @Then("^I see no discount for \"([^\"]*)\"$")
-    public void iSeeNoDiscountFor(int arg0) throws Throwable {
-        assertFalse(discountPage.discount.isDisplayed());
+    @And("^I choose options for product$")
+    public void iChooseOptionsForProduct() {
+       productPage.ChooseProductSize();
+       productPage.ChooseCheckbox();
+        productPage.SelectColor();
+        productPage.TextIntoTextarea();
+        productPage.UploadFile();
     }
 
-    @Then("^I see discount for \"([^\"]*)\" is \"([^\"]*)\"$")
-    public void iSeeDiscountForCalculation(int arg0, int arg1) throws Throwable {
-
+    @And("^I add product to shopping cart$")
+    public void iAddProductToPage() {
+        productPage.AddToCart();
     }
 
-    //Add To Cart
-    @When("^I click Add to Cart for \"([^\"]*)\"$")
-    public void iClickAddToCart(String arg0, int arg1) throws Throwable {
+    @And("^I go to$")
+    public void iGoToShoppingCart(Map<String, String> valuesToEnter) {
+        for (Map.Entry<String, String> e : valuesToEnter.entrySet()) {
+            driver.get(e.getValue());
+        }
     }
 
-
-    @And("^I see that \"([^\"]*)\" is added to Cart$")
-    public void iSeeAddedToCart(int arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Then("^I see price with discount$")
+    public void iSeePriceWithDiscount() {
+        cartPage.DiscountCheck();
     }
 
-
+    @Then("^I see discount is correct$")
+    public void iSeeDiscountIsCorrect() {
+       productListPage.DiscountCalculationCheck();
+    }
 }
