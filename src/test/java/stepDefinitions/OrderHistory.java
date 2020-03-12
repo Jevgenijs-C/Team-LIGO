@@ -19,123 +19,104 @@ public class OrderHistory {
     static OrderHistoryPage orderHistoryPage;
     static CheckOutInfoPage checkOutInfoPage;
 
-    @Given("^I am on web shop homepage$")
-    public void iAmOnWebShopHomepage() {
-        driver.get(orderHistoryPage.getOrderHistoryPage());
+    public OrderHistory (){
+    this.driver = Hooks.driver;
+    orderHistoryPage = PageFactory.initElements(Hooks.driver, OrderHistoryPage.class);
     }
 
-    @When("^I choose item iPhone and add it to cart$")
-    public void iChooseItemIPhoneAndAddItToCart() {
+
+
+    @When("^I am on my account page$")
+    public void seeAccountInfoAfterLogin() {
+       orderHistoryPage.seeAccountInfoAfterLogin();
 
     }
-
-    @And("^I click on cart button$")
-    public void iClickOnCartButton() {
+    @When("^I click on Order History page$")
+    public void setViewYourOrderHistory() {
+        orderHistoryPage.setViewYourOrderHistory();
     }
-
-    @And("^I click to checkout item$")
-    public void iClickToCheckoutItem() {
-    }
-
-    @And("^I am redirected to checkout form$")
-    public void iAmRedirectedToCheckoutForm() {
-    }
-
-    @And("^I fill first name$")
-    public void iFillFirstName() {
-    }
-
-    @And("^I fill second name$")
-    public void iFillSecondName() {
-    }
-
-    @And("^I fill address(\\d+) field$")
-    public void iFillAddressField(int arg0) {
-    }
-
-    @And("^I fill city field$")
-    public void iFillCityField() {
-    }
-
-    @And("^I fill post code field$")
-    public void iFillPostCodeField() {
-    }
-
-    @And("^I select region$")
-    public void iSelectRegion() {
-    }
-
-    @And("^I click on Continue to move away from Billing details$")
-    public void iClickOnContinueToMoveAwayFromBillingDetails() {
-    }
-
-    @And("^I select existing address for delivery$")
-    public void iSelectExistingAddressForDelivery() {
-    }
-
-    @And("^I click Continue to move away from Delivery Details$")
-    public void iClickContinueToMoveAwayFromDeliveryDetails() {
-    }
-
-    @And("^I select flat Rate for shipping$")
-    public void iSelectFlatRateForShipping() {
-    }
-
-    @And("^I click Continue to move away from Delivery Method$")
-    public void iClickContinueToMoveAwayFromDeliveryMethod() {
-    }
-
-    @And("^I select Cash on Delivery as payment method$")
-    public void iSelectCashOnDeliveryAsPaymentMethod() {
-    }
-
-    @And("^I select T&C checkbox$")
-    public void iSelectTCCheckbox() {
-    }
-
-    @And("^I click Continue to move away from Payment Method$")
-    public void iClickContinueToMoveAwayFromPaymentMethod() {
-    }
-
-    @And("^I click on Confirm Order button$")
-    public void iClickOnConfirmOrderButton() {
-    }
-
-    @Then("^I have checked out my purchase successfully$")
-    public void iHaveCheckedOutMyPurchaseSuccessfully()
-    {
-    }
-
-    @Given("^I am can see checkout success message$")
-    public void iAmCanSeeCheckoutSuccessMessage() {
-    }
-
-    @And("^I click on link under name History$")
-    public void iClickOnLinkUnderNameHistory() {
-        checkOutInfoPage.clickOrderHistoryLinkAfterCheckout();
+    @When("^I am on Order history page$")
+        public void getOrderHistoryPage(){
+     driver.get(orderHistoryPage.getOrderHistoryPage());
 
     }
 
-    @And("^I am redirected to Order history page$")
-    public void iAmRedirectedToOrderHistoryPage() {
-        checkOutInfoPage.getOrderHistoryPage();
+    @And("^I see order history grid$")
+    public void iSeeOrderHistoryGrid() {
+        orderHistoryPage.viewTable();
     }
 
-    @Then("^I see my recent order in table$")
-    public void iSeeMyRecentOrderInTable() {
+    @And("^I see Order ID field column$")
+    public void iSeeOrderIDFieldColumn() {
+        orderHistoryPage.checkOrderID();
     }
 
-    @Given("^I am on account page$")
-    public void iAmOnAccountPage() {
+    @And("^I see Customer field column$")
+    public void iSeeCustomerFieldColumn() {
+        orderHistoryPage.setCustomerInfo();
     }
 
-    @When("^I click on link \"([^\"]*)\"$")
-    public void iClickOnLink(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @And("^I see No\\.of Products column$")
+    public void iSeeNoOfProductsColumn() {
+        orderHistoryPage.setNrOfProducts();
     }
 
-    @Then("^I am directed to order history page$")
-    public void iAmDirectedToOrderHistoryPage() {
+    @And("^I see Status column$")
+    public void iSeeStatusColumn() {
+        orderHistoryPage.setStatus();
+    }
+
+    @And("^I see Total sum in \\$ column$")
+    public void iSeeTotalSumIn$Column() {
+        orderHistoryPage.setTotal();
+    }
+
+    @And("^I see Date Added – date in format dd/mm/yyyy$")
+    public void iSeeDateAddedDateInFormatDdMmYyyy() {
+        orderHistoryPage.setDateAdded();
+    }
+
+    @And("^I see button View column$")
+    public void iSeeButtonViewColumn() {
+        orderHistoryPage.setColumnForEye();
+    }
+
+
+    @And("^I click button View in grid$")
+    public void iClickButtonView() {
+        orderHistoryPage.clickButtonView();
+    }
+
+    @Then("^I am redirected to Order Information page$")
+    public void iAmRedirectedToOrderInformationPage() {
+        orderHistoryPage.redirectedToOrderInformation();
+    }
+
+
+    @Then("^I click Reorder$")
+    public void iClickReorder() {
+        orderHistoryPage.clickReorder();
+
+    }
+
+    @And("^I get reorder success alert$")
+    public void iSeeSuccessAlert() {
+        orderHistoryPage.reorderConfirmed();
+    }
+
+    @Then("^I see my Historical Order Grid$")
+    public void iSeeMyHistoricalOrderGrid() {
+        orderHistoryPage.seeAccountInfoAfterLogin();
+        orderHistoryPage.setViewYourOrderHistory();
+        orderHistoryPage.getOrderHistoryPage();
+        orderHistoryPage.viewTable();
+        orderHistoryPage.checkOrderID();
+        orderHistoryPage.setCustomerInfo();
+        orderHistoryPage.setNrOfProducts();
+        orderHistoryPage.setStatus();
+        orderHistoryPage.setTotal();
+        orderHistoryPage.setDateAdded();
+        orderHistoryPage.setColumnForEye();
+
     }
 }
