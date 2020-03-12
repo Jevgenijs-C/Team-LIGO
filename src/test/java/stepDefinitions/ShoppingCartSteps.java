@@ -14,6 +14,8 @@ import pages_sample.ShoppingCartPage;
 import stepDefinitions.Hooks;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -80,7 +82,7 @@ public class ShoppingCartSteps {
     }
 
     @And("^I see the message \"([^\"]*)\"$")
-    public void iSeeAlertMessage(String arg0) throws Throwable {
+    public void iSeeAlertMessage(String name) throws Throwable {
         shoppingCartPage.listOfCart("Your shopping cart is empty!");
 
     }
@@ -96,8 +98,8 @@ public class ShoppingCartSteps {
 
 
 
-    @When("^I add \"([^\"]*)\" into the search field$")
-    public void iAddIntoTheSearchField(String cartItem) throws Throwable {
+    @When("^I add item into the search field$")
+    public void iAddIntoTheSearchField(Map<String, String> cartItem) throws Throwable {
         shoppingCartPage.addSearch(cartItem);
 
     }
@@ -106,9 +108,9 @@ public class ShoppingCartSteps {
         driver.get(shoppingCartPage.getNiconPage());
     }
 
-    @And("^Correct items \"([^\"]*)\" and \"([^\"]*)\" is exist$")
-    public void correctItemsAndIsExist(String item, String price) throws Throwable {
-          shoppingCartPage.itemsExist();
+    @And("^Correct Item are exist$")
+    public void correctAreExist(Map<String, String> addedItem) throws Throwable {
+        shoppingCartPage. itemFound(addedItem);
 
     }
     @And("^I press add button on the page$")
@@ -122,33 +124,22 @@ public class ShoppingCartSteps {
         shoppingCartPage.clickTopButton();
         shoppingCartPage.getCartPage();
         }
+    @And("^I check product are exist into the cart$")
+    public void iCheckAreExistIntoTheCart(DataTable cartItems)  {
+        shoppingCartPage.itemsExist(cartItems);
+    }
 
-   // @And("^I check item is exist into the cart$")
-    //public void iCheckItemIsExistIntoTheCart() {
-      //  shoppingCartPage ;
 
-   // }
+    @And("^I delete product from the cart$")
+  public void iDeleteProductFromTheCart() {
+        shoppingCartPage.deleteItem();
 
-   // @And("^I check quantity field$")
-  //  public void iCheckQuantityField(DataTable table) {
+   }
 
-    //   driver.get (shoppingCartPage.cartParam( ));
-   // }
-
-    // @And("^I check price field$")
-   // public void iCheckPriceField() {
-  //  }
-
-  //  @And("^I delete product from the cart$")
-  //  public void iDeleteProductFromTheCart() {
-   //     shoppingCartPage.deleteItem();
-
-   // }
-
-   // @Then("^I check cart is empty$")
-   // public void iCheckCartIsEmpty() {
-   //     shoppingCartPage.isEmptyCart();
-   // }
+    @Then("^I check cart is empty \"([^\"]*)\"$")
+    public void iCheckCartIsEmpty(String message) throws Throwable {
+     shoppingCartPage.IsEmptyCart("Your shopping cart is empty!");
+   }
 
 
     @When("^I put  “item” into the search field$")
@@ -270,7 +261,6 @@ public class ShoppingCartSteps {
     @Then("^I see no items into the cart on the button$")
     public void iSeeNoItemsIntoTheCartOnTheButton() {
     }
-
 
 
 }

@@ -8,9 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import cucumber.api.DataTable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 import static org.junit.Assert.*;
 
@@ -18,6 +20,7 @@ import static org.junit.Assert.*;
 public class ShoppingCartPage {
     private WebDriver driver;
     private String cartItem;
+
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"cart-total\"]")
     private WebElement rightButton;
@@ -47,6 +50,8 @@ public class ShoppingCartPage {
     private WebElement priceNikon;
     @FindBy(how = How.XPATH, using = " //*[@id=\"content\"]/p")
     private WebElement emptyCart;
+    @FindBy(how = How.XPATH, using = " //*[@id=\"content\"]/form/div/table/tbody/tr/td[2]/a")
+    private WebElement nikonInCart;
 
 
     public String getOpenPage() {
@@ -93,6 +98,7 @@ public class ShoppingCartPage {
     }
 
     public void listOfCart(String name) {
+
         assertEquals(listCart.getText(), "Your shopping cart is empty!");
     }
 
@@ -106,46 +112,63 @@ public class ShoppingCartPage {
 
     }
 
-    public void addSearch(Map<String, String> cartItem) throws Throwable { {
-     for (Map.Entry<String, String> e : cartItem.entrySet()) {
-         searchField.sendKeys(cartItem);
-                driver.findElement(By.id(e.getKey())).sendKeys(e.getValue());
-                System.out.println("key is " + e.getKey());
-                System.out.println("value is " + e.getValue());
+    public void addSearch(Map<String, String> cartItem) {
+        for (Map.Entry<String, String> e : cartItem.entrySet()) {
+            if (e.getKey() == "item") {
+                searchField.sendKeys(e.getValue());
             }
         }
-        searchField.sendKeys(cartItem);
-
     }
 
-    public void itemsExist() {
-        assertTrue(nikon300.isDisplayed());
-        assertTrue(priceNikon.isDisplayed());
-
+    public void itemFound(Map<String, String> addedItem) {
+        for (Map.Entry<String, String> e : addedItem.entrySet()) {
+            if (e.getKey() == "item") {
+                assertEquals(nikon300.getText(), e.getValue());
+            } else if (e.getKey() == "price") {
+                assertEquals(priceNikon.getText(), e.getValue());
+            }
+        }
     }
 
     public void clickAddButton() {
         addButtonNik.click();
     }
 
-    public void cartParam(DataTable table) {
-        List<List<String>> data = table.asLists(String.class);
-      data.get(1);
-      data.get(2);
-      data.get(3);
-      data.get(4);
-
-       // assertEquals("", cartElemNum.getAttribute());
-    }
-
     public void deleteItem() {
-        delElem.click();
+          delElem.click();
 
     }
-        public void isEmptyCart() {
-            assertEquals(emptyCart.getText(),"Your shopping cart is empty!");
+
+    public void IsEmptyCart(String message) throws InterruptedException {
+        Thread.sleep(10000);
+        assertEquals(emptyCart.getText(), "Your shopping cart is empty!");
 
     }
+
+    public void itemsExist(DataTable cartItems) {
+
+        List<Map<String, String>> cartItemsList = cartItems.asMaps(String.class, String.class);
+
+        for (int i = 0; i < cartItemsList.size(); i++) {
+
+            for (Map.Entry<String, String> e : cartItemsList.get(i).entrySet()) {
+                if (e.getKey() == "name") {
+                    assertEquals(nikonInCart.getText(), e.getValue());
+                } else if (e.getKey() == "quantity") {
+                    assertEquals(cartElemNum.getText(), e.getValue());
+                } else if (e.getKey() == "price") {
+                    assertEquals(priceFieldCart.getText(), e.getValue());
+                } else if (e.getKey() == "total") {
+                    assertEquals(totalPrice.getText(), e.getValue());
+                }
+            }
+        }
+
+    }
+
+
 }
+
+
 
 
