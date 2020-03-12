@@ -16,8 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ShoppingCartSteps {
     private WebDriver driver;
@@ -39,6 +38,7 @@ public class ShoppingCartSteps {
         shoppingCartPage.checkRightButton();
 
     }
+
     @And("^I find a cart button on the top menu$")
     public void iFindACartButtonOnTheTopMenu() {
         shoppingCartPage.checkTopButton();
@@ -62,7 +62,8 @@ public class ShoppingCartSteps {
     }
 
     @And("^I go to new page$")
-    public void iGoToNewPage() { driver.get(shoppingCartPage.getNewRandomPage());
+    public void iGoToNewPage() {
+        driver.get(shoppingCartPage.getNewRandomPage());
     }
 
     @And("^I see a cart button on the top menu$")
@@ -91,11 +92,11 @@ public class ShoppingCartSteps {
     public void iBackOnPreviousPage() {
         assertEquals(shoppingCartPage.getNewRandomPage(), driver.getCurrentUrl());
     }
+
     @Then("^I click on the chart button on the top menu$")
     public void iClickOnTheChartButtonOnTheTopMenu() {
         shoppingCartPage.clickTopButton();
     }
-
 
 
     @When("^I add item into the search field$")
@@ -103,6 +104,7 @@ public class ShoppingCartSteps {
         shoppingCartPage.addSearch(cartItem);
 
     }
+
     @And("^I direct into the item page$")
     public void iDirectIntoTheItemPage() {
         driver.get(shoppingCartPage.getNiconPage());
@@ -110,9 +112,10 @@ public class ShoppingCartSteps {
 
     @And("^Correct Item are exist$")
     public void correctAreExist(Map<String, String> addedItem) throws Throwable {
-        shoppingCartPage. itemFound(addedItem);
+        shoppingCartPage.itemFound(addedItem);
 
     }
+
     @And("^I press add button on the page$")
 
     public void iPressAddButtonOnThePage() {
@@ -123,36 +126,44 @@ public class ShoppingCartSteps {
     public void iMoveOnTheCartUsingTopMenuLink() {
         shoppingCartPage.clickTopButton();
         shoppingCartPage.getCartPage();
-        }
+    }
+
     @And("^I check product are exist into the cart$")
-    public void iCheckAreExistIntoTheCart(DataTable cartItems)  {
+    public void iCheckAreExistIntoTheCart(DataTable cartItems) {
         shoppingCartPage.itemsExist(cartItems);
     }
 
 
     @And("^I delete product from the cart$")
-  public void iDeleteProductFromTheCart() {
+    public void iDeleteProductFromTheCart() {
         shoppingCartPage.deleteItem();
 
-   }
+    }
 
     @Then("^I check cart is empty \"([^\"]*)\"$")
     public void iCheckCartIsEmpty(String message) throws Throwable {
-     shoppingCartPage.IsEmptyCart("Your shopping cart is empty!");
-   }
-
-
-    @When("^I put  “item” into the search field$")
-    public void iPutItemIntoTheSearchField() {
+        shoppingCartPage.IsEmptyCart("Your shopping cart is empty!");
     }
 
-    @And("^I move into the “item page”$")
+
+
+    @When("^I put item into the search field$")
+    public void iPutItemIntoTheSearchField(Map<String, String> cartItem) {
+        shoppingCartPage.itemFound(cartItem);
+    }
+
+    @And("^I move into the item page$")
     public void iMoveIntoTheItemPage() {
+        driver.get(shoppingCartPage.getApplePage());
+
     }
 
     @And("^I click on the cart button$")
     public void iClickOnTheCartButton() {
+        shoppingCartPage.clickAddButton();
+        assertFalse();
     }
+
 
     @And("^I fill two “fields”$")
     public void iFillTwoFields() {

@@ -45,13 +45,18 @@ public class ShoppingCartPage {
     @FindBy(how = How.NAME, using = "search")
     private WebElement searchField;
     @FindBy(how = How.XPATH, using = "//*[@id=\"content\"]//h1")
-    private WebElement nikon300;
+    private WebElement pageElem;
     @FindBy(how = How.XPATH, using = " //*[@id=\"content\"]//li[1]/h2")
     private WebElement priceNikon;
     @FindBy(how = How.XPATH, using = " //*[@id=\"content\"]/p")
     private WebElement emptyCart;
     @FindBy(how = How.XPATH, using = " //*[@id=\"content\"]/form/div/table/tbody/tr/td[2]/a")
     private WebElement nikonInCart;
+   @FindBy(how = How.XPATH, using = " //*[@id=\"content\"]/form/div/table/tbody/tr/td[2]/a")
+    private WebElement nikonInCart;
+
+
+
 
 
     public String getOpenPage() {
@@ -123,7 +128,7 @@ public class ShoppingCartPage {
     public void itemFound(Map<String, String> addedItem) {
         for (Map.Entry<String, String> e : addedItem.entrySet()) {
             if (e.getKey() == "item") {
-                assertEquals(nikon300.getText(), e.getValue());
+                assertEquals(pageElem.getText(), e.getValue());
             } else if (e.getKey() == "price") {
                 assertEquals(priceNikon.getText(), e.getValue());
             }

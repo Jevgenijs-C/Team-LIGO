@@ -38,11 +38,11 @@ Feature: As a user I check that shopping cart is visible in all pages
   @Third
   Scenario: As a user I add an item with required fields
 
-    When I put  “item” into the search field
-      | item            |
-      | Apple Cinema 30 |
-    And I move into the “item page”
-    And Name of item "
+    When I put item into the search field
+      | item            | Apple Cinema 30 |
+
+    And I move into the item page
+    And I check name of the item
     And I click on the cart button
     And I fill two “fields”
     And I click on the cart button again
