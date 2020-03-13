@@ -18,8 +18,6 @@ public class LoginPage {
     private WebElement loginButton;
 
 
-
-
     public String getLoginPageUrl() {
         return "http://www.demoshop24.com/index.php?route=account/login";
     }
