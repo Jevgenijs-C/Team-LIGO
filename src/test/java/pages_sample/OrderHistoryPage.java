@@ -1,11 +1,15 @@
 package pages_sample;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import stepDefinitions.Hooks;
+import sun.plugin2.message.ShowDocumentMessage;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -35,7 +39,7 @@ public class OrderHistoryPage {
     private WebElement columnForEye;
     //@FindBy(how = How.XPATH,using = "//a[@href='http://www.demoshop24.com/index.php?route=account/order/info&order_id=184']")
     //private WebElement buttonView;
-    @FindBy(how = How.XPATH,using = "//*[contains(@data-original-title,'View')]")
+    @FindBy(how = How.XPATH,using = "//*[contains(@href,'http://www.demoshop24.com/index.php?route=account/order/info&order_id=184')]")
     private WebElement buttonView;
 
     @FindBy(how = How.XPATH,using = "//*[contains(@data-original-title,'Reorder')]")
@@ -43,9 +47,31 @@ public class OrderHistoryPage {
     @FindBy(how= How.CLASS_NAME,using = "alert-success")
     private WebElement reorderSuccessAlert;
 
-   // @FindBy(how = How.XPATH,using = "//*[contains(@data-original-title,'Return')]")
-    @FindBy(how = How.CLASS_NAME,using="fa fa-reply" )
+   @FindBy(how = How.XPATH,using = "//*[contains(@data-original-title,'Return')]")
+    //@FindBy(how = How.CLASS_NAME,using="fa fa-reply" )
     private WebElement returnButton;
+
+    @FindBy(how = How.XPATH,using = "//*[contains(text(),'Reason for Return')]")
+    private WebElement labelReasonForReturn;
+
+    @FindBy(how = How.XPATH,using = "//input[@type='radio'][following-sibling::text()[position()=1][contains(., 'Dead On Arrival')]]")
+    private WebElement radioDeadOnArrival;
+
+    @FindBy(how = How.XPATH,using = "//input[@type='radio'][following-sibling::text()[position()=1][contains(., 'Faulty, please supply details')]]")
+    private WebElement radioFaulty;
+
+    @FindBy(how = How.XPATH, using = "//input[@type='radio'][following-sibling::text()[position()=1][contains(., 'Error')]]")
+    private WebElement radioError;
+
+    @FindBy(how = How.XPATH,using = "//input[@type='radio'][following-sibling::text()[position()=1][contains(., 'Other, please supply details')]]")
+    private WebElement radioOther;
+
+    @FindBy(how = How.XPATH,using = "//input[@type='radio'][following-sibling::text()[position()=1][contains(., 'Received Wrong Item')]]")
+    private WebElement radioWrongItem;
+
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Showing')]")
+    private WebElement pagination;
+
 
     public String seeAccountInfoAfterLogin(){
         return "http://www.demoshop24.com/index.php?route=account/account";
@@ -66,6 +92,15 @@ public class OrderHistoryPage {
     public void viewTable() {
         assertTrue((table.isDisplayed()));
     }
+    public void listRows(){
+        List < WebElement > rows_table = table.findElements(By.tagName("tr"));
+        int rows_count = rows_table.size();
+        for (int row = 0; row < rows_count; row++);
+        //List rows = driver.findElements(By.xpath("//*[@id=\"content\"]/div[1]/table/tbody/tr"));
+        //for (int i = 0; rows.size() >= i; i++){
+
+            System.out.println("No of rows are : " + rows_table.size());
+        }
 
     public void setCustomerInfo(){
         assertTrue(customerInfo.isDisplayed());
@@ -94,6 +129,30 @@ public class OrderHistoryPage {
         buttonView.click();
     }
 
+    public void viewRadioDead(){
+        radioDeadOnArrival.isDisplayed();
+    }
+
+    public void viewFaulty(){
+        radioFaulty.isDisplayed();
+    }
+
+    public void viewPaymentError(){
+        radioError.isDisplayed();
+    }
+
+    public void viewOther(){
+        radioOther.isDisplayed();
+    }
+
+    public void viewWrongItem(){
+        radioWrongItem.isDisplayed();
+    }
+
+    public void seeLabelReasonForReturn(){
+        labelReasonForReturn.isDisplayed();
+    }
+
     public String redirectedToOrderInformation(){
         return "http://www.demoshop24.com/index.php?route=account/order/info&order_id=184";
     }
@@ -112,6 +171,12 @@ public class OrderHistoryPage {
     public String returnDirectsTo() {
         return "http://www.demoshop24.com/index.php?route=account/return/add&order_id=184&product_id=40";
     }
+
+    public void viewPagination(){
+        assertTrue(pagination.isDisplayed());
+    }
+
+
 
 
 }

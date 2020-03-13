@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 public class OrderHistory {
     private WebDriver driver;
     static OrderHistoryPage orderHistoryPage;
-    static CheckOutInfoPage checkOutInfoPage;
+
 
     public OrderHistory (){
     this.driver = Hooks.driver;
@@ -89,7 +89,7 @@ public class OrderHistory {
 
     @Then("^I am redirected to Order Information page$")
     public void iAmRedirectedToOrderInformationPage() {
-        orderHistoryPage.redirectedToOrderInformation();
+        driver.get(orderHistoryPage.redirectedToOrderInformation());
     }
 
 
@@ -118,5 +118,71 @@ public class OrderHistory {
         orderHistoryPage.setDateAdded();
         orderHistoryPage.setColumnForEye();
 
+    }
+
+    @Then("^I click Return$")
+    public void iClickReturn() {
+        orderHistoryPage.clickReturn();
+    }
+
+    @And("^I am redirected to Return Product page$")
+    public void iAmRedirectedToReturnProductPage() {
+        driver.get(orderHistoryPage.returnDirectsTo());
+    }
+
+    @And("^I see Reason for Return$")
+    public void iSeeReasonForReturn() {
+        orderHistoryPage.seeLabelReasonForReturn();
+    }
+
+    @And("^First LOV is Dead On Arrival$")
+    public void firstLOVIsDeadOnArrival() {
+        orderHistoryPage.viewRadioDead();
+    }
+
+    @And("^Second LOV is Faulty, please supply details$")
+    public void secondLOVIsFaultyPleaseSupplyDetails() {
+        orderHistoryPage.viewFaulty();
+    }
+
+    @And("^Third LOV is Payment Error$")
+    public void thirdLOVIsPaymentError() {
+        orderHistoryPage.viewPaymentError();
+    }
+
+    @And("^Forth LOV is Other, please supply details$")
+    public void forthLOVIsOtherPleaseSupplyDetails() {
+        orderHistoryPage.viewOther();
+    }
+
+    @And("^Fifth LOV is Received Wrong Item$")
+    public void fifthLOVIsReceivedWrongItem() {
+        orderHistoryPage.viewWrongItem();
+    }
+
+    @Then("^I can see all return options$")
+    public void iCanSeeAllOptions() {
+        orderHistoryPage.seeLabelReasonForReturn();
+        orderHistoryPage.viewRadioDead();
+        orderHistoryPage.viewFaulty();
+        orderHistoryPage.viewPaymentError();
+        orderHistoryPage.viewOther();
+        orderHistoryPage.viewWrongItem();
+    }
+
+    @Then("^I can reorder some item$")
+    public void iCanReorderSomeItem() {
+        orderHistoryPage.clickReorder();
+        orderHistoryPage.reorderConfirmed();
+    }
+
+    @And("^I see grid pagination$")
+    public void iSeeGridPagination() {
+        orderHistoryPage.viewPagination();
+    }
+
+    @And("^see how many rows are in grid$")
+    public void seeHowManyRowsAreInGrid() {
+        orderHistoryPage.listRows();
     }
 }
