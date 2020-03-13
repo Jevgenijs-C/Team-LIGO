@@ -11,7 +11,7 @@ public class LoginPageCorrected {
     private WebElement emailInput;
     @FindBy(how = How.ID, using = "input-password")
     private WebElement passwordInput;
-    @FindBy(how = How.XPATH, using = "//*[@id='content']/div/div[2]/div/form/input[1]")
+    @FindBy(how = How.CSS, using = "submit")
     private WebElement loginButton;
 
 
