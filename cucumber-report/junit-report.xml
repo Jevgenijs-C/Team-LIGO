@@ -1,22 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite failures="1" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="87.456928">
-<testcase classname="As a user I need to edit a list" name="As a user I add a new person" time="87.456928">
-<failure message="org.junit.ComparisonFailure: expected:&lt;...ithub.io/site/tasks/[enter_a_new_person_with_a_job].html&gt; but was:&lt;...ithub.io/site/tasks/[list_of_people_with_jobs].html&gt;&#13;&#10;&#9;at org.junit.Assert.assertEquals(Assert.java:115)&#13;&#10;&#9;at org.junit.Assert.assertEquals(Assert.java:144)&#13;&#10;&#9;at stepDefinitions.TaskTwoSteps.iSeeNewPage(TaskTwoSteps.java:38)&#13;&#10;&#9;at ✽.And I see new page(Task2.feature:9)&#13;&#10;"><![CDATA[Given I open the page.......................................................passed
-When I press add person button..............................................passed
-And I see new page..........................................................failed
-And I add  new name "Ivan"..................................................skipped
-And I add new job title "driver"............................................skipped
-And I press add button......................................................skipped
-And I redirect on main page.................................................skipped
-And I see new "Ivan" and new "driver" there.................................skipped
-And I reset list button.....................................................skipped
-Then I don't see new person.................................................skipped
-
-StackTrace:
-org.junit.ComparisonFailure: expected:<...ithub.io/site/tasks/[enter_a_new_person_with_a_job].html> but was:<...ithub.io/site/tasks/[list_of_people_with_jobs].html>
-	at org.junit.Assert.assertEquals(Assert.java:115)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at stepDefinitions.TaskTwoSteps.iSeeNewPage(TaskTwoSteps.java:38)
-	at ✽.And I see new page(Task2.feature:9)
-]]></failure>
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="40.829524">
+<testcase classname="As a user I check that shopping cart is visible in all pages" name="As a use I add an item which is marked as out of stock" time="40.829524">
+<system-out><![CDATA[Given I open a page.........................................................passed
+When I add item into the search field.......................................passed
+And I move to the search page with item.....................................passed
+And I click on exist element................................................passed
+And I go to the correct page................................................passed
+And I click add to cart.....................................................passed
+And I open a cart using right menu button...................................passed
+And I see item marked as out of stock.......................................passed
+Then I see red color note that item out of stock with message " Products marked with *** are not available in the desired quantity or not in stock".passed
+]]></system-out>
 </testcase>
 </testsuite>
