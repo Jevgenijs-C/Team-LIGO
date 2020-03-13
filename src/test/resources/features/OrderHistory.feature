@@ -7,15 +7,15 @@ Feature: Order History management
   Scenario: Login in one step
 
   @first
-   Scenario: As a user I see my Order History grid
-     Then I see my Historical Order Grid
-      And I see grid pagination
-      And see how many rows are in grid
+  Scenario: As a user I see my Order History grid
+    Then I see my Historical Order Grid
+    And I see grid pagination
+    And see how many rows are in grid
   @first
-    Scenario: As a User from History grid I want to view Order Information
-     When I am on Order history page
-     And I click button View in grid
-     Then I am redirected to Order Information page
+  Scenario: As a User from History grid I want to view Order Information
+    When I am on Order history page
+    And I click button View in grid
+    Then I am redirected to Order Information page
 
   @first
   Scenario: As a user I want to reorder item using Order History

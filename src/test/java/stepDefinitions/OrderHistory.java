@@ -185,4 +185,11 @@ public class OrderHistory {
     public void seeHowManyRowsAreInGrid() {
         orderHistoryPage.listRows();
     }
+
+    @Then("^I click <button>, get <result>$")
+    public void iClickButtonGetResult() {
+        orderHistoryPage.clickReturn();
+        driver.get(orderHistoryPage.returnDirectsTo());
+
+    }
 }
