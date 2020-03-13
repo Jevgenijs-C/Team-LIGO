@@ -5,10 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 
-import static org.junit.Assert.*;
-
-
-public class LoginPage {
+public class LoginPageCorrected {
 
     @FindBy(how = How.ID, using = "input-email")
     private WebElement emailInput;
@@ -28,13 +25,13 @@ public class LoginPage {
         return "http://www.demoshop24.com/index.php?route=account/account";
     }
 
-    public void enterEmail(String email) {
+    public void enterEmail(String name) {
         emailInput.click();
-        emailInput.sendKeys(email);
+        emailInput.sendKeys("ivan@ivanov.lv");
     }
     public  void enterPassword(String password) {
         passwordInput.click();
-        passwordInput.sendKeys(password);
+        passwordInput.sendKeys("123456");
     }
     public void clickLogin() {
         loginButton.click();

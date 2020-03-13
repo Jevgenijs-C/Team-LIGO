@@ -8,10 +8,10 @@ import static org.junit.Assert.assertEquals;
 
 
 public class CartPage {
-    @FindBy(how = How.XPATH, using = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[5]")
+    @FindBy(how = How.CSS, using = ".table-responsive tbody td.text-right")
     private WebElement UnitPrice;
-    public void DiscountCheck(){
-        assertEquals("$159.20", UnitPrice.getText());
+    public void DiscountCheck(String discountPrice){
+        assertEquals(discountPrice, UnitPrice.getText());
     }
 
 }
